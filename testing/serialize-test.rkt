@@ -55,4 +55,8 @@
                (thunk (sexpr-deserialize
                        #s(triangle #s(point 0 0)
                                    #s(point 0 1)
-                                   #s(point 1 0)))))))
+                                   #s(point 1 0))))))
+
+  (let ([t (triangle (point 0 0) (point 0 1) (point 1 0))])
+    (check-equal? (sexpr-deserialize/fasl (sexpr-serialize/fasl t)) t)
+    (check-equal? (sexpr-deserialize/base64 (sexpr-serialize/base64 t)) t)))

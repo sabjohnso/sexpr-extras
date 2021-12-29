@@ -210,4 +210,4 @@
   (base64-encode (sexpr-serialize/fasl v) newline))
 
 (define (sexpr-deserialize/base64 bytes)
-  (base64-decode (sexpr-deserialize/fasl bytes)))
+  (sexpr-deserialize/fasl (base64-decode bytes)))
