@@ -1,5 +1,5 @@
 #lang scribble/manual
-@require[@for-label[sexp-extras
+@require[@for-label["../main.rkt"
                     racket/base]]
 
 @title{sexp-extras}
