@@ -1,5 +1,5 @@
 #lang info
-(define collection "sexp-extras")
+(define collection "sexpr-extras")
 (define deps '("base"))
 (define build-deps '("scribble-lib" "racket-doc" "rackunit-lib"))
 (define scribblings '(("scribblings/sexp-extras.scrbl" ())))
