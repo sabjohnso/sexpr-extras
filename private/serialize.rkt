@@ -2,7 +2,7 @@
 
 (require
  (for-syntax racket racket/syntax syntax/parse)
-  racket/generic racket/fasl
+  racket/generic racket/fasl net/base64
   "prefab.rkt"
   "sexpr.rkt")
 
@@ -26,8 +26,10 @@
   [sexpr-deserialize-list        (-> sexpr? (or/c (listof (listof sexpr?)) null?))]
   [sexpr-deserialize-vector      (-> sexpr? (or/c (listof (vectorof sexpr?)) null?))]
   [sexpr-deserialize-hash        (-> sexpr? (or/c (listof hash?) null?))]
-  [fasl-serialize (-> sexpr-serializable? bytes?)]
-  [fasl-deserialize (-> bytes? any/c)]
+  [sexpr-serialize/fasl     (-> sexpr-serializable? bytes?)]
+  [sexpr-serialize/base64   (-> sexpr-serializable? bytes?)]
+  [sexpr-deserialize/fasl   (-> bytes? any/c)]
+  [sexpr-deserialize/base64 (-> bytes? any/c)]
   [current-sexpr-deserializers (parameter/c (listof (-> sexpr? list?)))]
   [sexpr-deserializer (-> sexpr-deserializable? (-> sexpr? list?))]))
 
@@ -198,8 +200,14 @@
            (cons (sexpr-deserializer name)
                  (current-sexpr-deserializers)))))]))
 
-(define (fasl-deserialize bytes)
+(define (sexpr-deserialize/fasl bytes)
   (sexpr-deserialize (fasl->s-exp bytes)))
 
-(define (fasl-serialize v)
+(define (sexpr-serialize/fasl v)
   (s-exp->fasl (sexpr-serialize v)))
+
+(define (sexpr-serialize/base64 v [newline #"\r\n"])
+  (base64-encode (sexpr-serialize/fasl v) newline))
+
+(define (sexpr-deserialize/base64 bytes)
+  (base64-decode (sexpr-deserialize/fasl bytes)))
