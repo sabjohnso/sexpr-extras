@@ -5,7 +5,7 @@
 @title{sexp-extras}
 @author{sbj}
 
-@defmodule[sexp-extras]
+@defmodule[sexpr-extras]
 
 @defproc[(sexpr? [v any/c]) boolean?]{
  Return @racket[#t] if @racket[v] is an S-expression. Otherwise, return @racket[#f].
