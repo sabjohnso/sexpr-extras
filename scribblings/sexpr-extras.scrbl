@@ -12,6 +12,5 @@
 }
 
 @defproc[(prefab? [v any/c]) boolean?]{
- Return @racket[#t] if @racket[v] is an instance of a
-  @secref["prefab structure type" #:doc '(lib "scribblings/guide/guide.scrbl")]. Otherwise, return  @racket[#f].
+ Return @racket[#t] if @racket[v] is an instance of a prefab struct type. Otherwise, return  @racket[#f].
 }
