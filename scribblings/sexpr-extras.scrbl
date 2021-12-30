@@ -15,9 +15,15 @@
  Return @racket[#t] if @racket[v] is an instance of a prefab struct type (See @secref["prefab-struct" #:doc '(lib "scribblings/guide/guide.scrbl")]). Otherwise, return  @racket[#f].
 }
 
+@defproc[(sexpr-serializable? [v any/c]) boolean?]{
+ Return @racket[#t] if @racket[v] is can be serialized to an S-expression.  Otherwise, return @racket[#f].
+}
+
 @defproc[(sexpr-serialize [v sexpr-serializable?]) sexpr?]{
  Return an @racket[sexpr?] representation of the input value.
 }
+
+
 
 @defproc[(sexpr-deserialize [v sexpr?]) any/c]{
  Deserialize the input @racket[sexpr?].
